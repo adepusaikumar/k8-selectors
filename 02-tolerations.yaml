@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-tolerated
+  labels:
+    env: test
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+  # asking for VIP room
+  nodeSelector:
+    project: roboshop
+  # showing booking confirmation
+  # The node has to be tainted with key=project, value=roboshop and effect=NoExecute to allow this pod to be scheduled on the node
+  tolerations:
+  - key: "project"
+    operator: "Equal"
+    value: "roboshop"
+    effect: "NoExecute"
