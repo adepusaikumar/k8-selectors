@@ -16,9 +16,11 @@ spec:
           - matchExpressions:
               - key: topology.kubernetes.io/zone
                 operator: In
+                # Schedules the pod only on nodes in the us-east-1d or us-east-1b zones
                 values:
                   - us-east-1d
                   - us-east-1b
+      # Soft Rule
       preferredDuringSchedulingIgnoredDuringExecution:
         - weight: 100
           preference:
